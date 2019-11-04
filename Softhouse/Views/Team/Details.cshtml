@@ -1,0 +1,72 @@
+﻿@using Softhouse.Models
+@model Team
+
+@{
+    ViewBag.Title = "Details";
+    List<Player> players = (List<Player>)ViewBag.Players;
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.conference)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.conference)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.full_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.full_name)
+        </dd>
+
+    </dl>
+</div>
+
+<hr />
+<h5>Players of team</h5>
+<table class="table table-bordered">
+    <tr>
+        <th>@Html.ActionLink("Player", "Index", new { sortOrder = ViewBag.NameSort })</th>
+        <th>@Html.ActionLink("Team", "Index", new { sortOrder = ViewBag.TeamSort })</th>
+        <th>@Html.ActionLink("Position", "Index", new { sortOrder = ViewBag.PositionSort })</th>
+
+        <th>Actions</th>
+    </tr>
+    @foreach (Player item in players)
+    {
+        <tr>
+            <td>@item.first_name @item.last_name</td>
+            <td>@item.team.full_name</td>
+            <td>@item.position</td>
+            <td>
+                <a href="/player/delete?id=@item.id" class="btn btn-group-sm btn-danger">Delete</a>
+                <a href="/player/edit?id=@item.id" class="btn btn-group-sm btn-warning">Edit</a>
+                <a href="/player/details?id=@item.id" class="btn btn-group-sm btn-info">Details</a>
+
+            </td>
+        </tr>
+    }
+</table>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,1 @@
+[{"id":"38150928-8fda-482c-9293-bb2221795551","first_name":"Mirza","last_name":"Šišić","position":"C","teamId":"2","team":{"id":"2","city":"Boston","conference":"East","full_name":"Boston Celtics"}}]

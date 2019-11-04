@@ -1,0 +1,58 @@
+﻿@using Softhouse.Models;
+@model Player
+
+
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Do you want delete @Model.first_name @Model.last_name?</h2>
+<form action="~/player/delete/?id=@Model.id" method="post">
+    <div>
+       
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.first_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.first_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.last_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.last_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.position)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.position)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.team.full_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.team.full_name)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        <div class="btn btn-group">
+            <td><button type="submit" class="btn btn-danger">Delete</button></td>
+            <a href="~/player" class="btn btn-link">Back to list</a>
+        </div>
+
+    </p>
+</form>

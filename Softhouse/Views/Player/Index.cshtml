@@ -1,0 +1,59 @@
+﻿@using Softhouse.Models
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@model PagedList.IPagedList<Player>
+
+
+<h3 style="margin-left:40%;margin-right:40%">List of players</h3>
+<br />
+@using (Html.BeginForm())
+{
+    <div class="form-inline">
+        <input type="text" name="searchParam" onchange="this.form.submit()" class=" form-control" placeholder="Search..." />
+        <label style="font-weight:bold;font-size:21px;margin-left:5%;margin-right:5%;">Teams:</label>
+        @Html.DropDownList("teamId", null, htmlAttributes: new { @class = "form-control", @onchange = "this.form.submit()" })
+        <label style="font-weight:bold;font-size:21px;margin-left:5%;margin-right:5%;">Positions:</label>
+
+        @Html.DropDownList("position", null, htmlAttributes: new { @class = "form-control", @onchange = "this.form.submit()" })
+    </div>
+
+}
+
+<br />
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>@Html.ActionLink("Player", "Index", new { sortOrder = ViewBag.NameSort })</th>
+        <th>@Html.ActionLink("Team", "Index", new { sortOrder = ViewBag.TeamSort })</th>
+        <th>@Html.ActionLink("Position", "Index", new { sortOrder = ViewBag.PositionSort })</th>
+
+        <th>Actions</th>
+    </tr>
+    @foreach (Player item in Model)
+    {
+        <tr>
+            <td>@item.first_name @item.last_name</td>
+            <td>@item.team.full_name</td>
+            <td>@item.position</td>
+            <td>
+                <a href="/player/delete?id=@item.id" class="btn btn-group-sm btn-danger">Delete</a>
+                <a href="/player/edit?id=@item.id" class="btn btn-group-sm btn-warning">Edit</a>
+                <a href="/player/details?id=@item.id" class="btn btn-group-sm btn-info">Details</a>
+
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+<hr /><div class="btn-group" style="float:right">
+    <a href="~/player/createTextFile?data=all" class="btn btn-success">Create all data JSON text file</a>
+    <a href="~/player/createTextFile?data=part" class="btn btn-success">Create displayed data JSON text file</a>
+</div>

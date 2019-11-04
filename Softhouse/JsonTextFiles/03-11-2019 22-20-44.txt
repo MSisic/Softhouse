@@ -1,0 +1,1 @@
+[{"id":"1","first_name":"Alex","last_name":"Abrines","position":"F","teamId":"4","team":{"id":"4","city":"Charlotte","conference":"East","full_name":"Charlotte Hornets"}}]

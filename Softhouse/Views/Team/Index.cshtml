@@ -1,0 +1,41 @@
+﻿@using Softhouse.Models
+
+
+@model IEnumerable<Team>
+
+
+<h3 style="margin-left:40%;margin-right:40%">List of teams</h3>
+<br />
+@using (Html.BeginForm())
+{
+    <div class="form-inline">
+        <input type="text" name="searchParam" onchange="this.form.submit()" class=" form-control" placeholder="Search..." />
+          </div>
+
+}
+
+<br />
+<div class="table">
+    <table >
+        <tr>
+            <th>@Html.ActionLink("Team", "Index", new { sortOrder = ViewBag.TeamSort })</th>
+            <th>@Html.ActionLink("Conference", "Index", new { sortOrder = ViewBag.ConferenceSort })</th>
+            <th>@Html.ActionLink("City", "Index", new { sortOrder = ViewBag.CitySort })</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (Team item in Model)
+        {
+            <tr>
+                <td>@item.full_name </td>
+                <td>@item.conference</td>
+                <td>@item.city</td>
+                <td>
+                    <a href="/team/details?id=@item.id" class="btn btn-group-sm btn-info">Details</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+<br />
+
